@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Império's Academia — Campinas</title>
+<meta name="description" content="Academia em Campinas com nota 4,8 no Google. Musculação, cardio e aulas com estrutura completa. Av. Ana Beatriz Bierrembach, 452 - Vila Mimosa." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --base: #0a0a0e; --surface: #121217; --surface-hi: #1a1a21;
+    --primary: #e8b028; --primary-dim: #c08c14;
+    --accent: #f4f4f5; --muted: #8a8a96;
+    --radius: 10px; --radius-sm: 8px; --maxw: 1140px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--base); color:var(--accent); font-family:'Inter',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  img { max-width:100%; display:block; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+  .mono { font-family:'JetBrains Mono',monospace; letter-spacing:.06em; text-transform:uppercase; font-size:12px; color:var(--muted); }
+  header { position:fixed; top:0; left:0; right:0; z-index:50; background:rgba(10,10,14,.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(244,244,245,.06); }
+  .nav { display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .logo { font-family:'Archivo',sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; }
+  .logo span { color:var(--primary); }
+  .nav-links { display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  .nav-links a:hover { color:var(--accent); }
+  .btn { display:inline-flex; align-items:center; gap:8px; background:var(--primary); color:#170e00; font-weight:600; font-size:14px; padding:12px 22px; border-radius:var(--radius-sm); transition:filter .2s, transform .2s; }
+  .btn:hover { filter:brightness(1.12); transform:translateY(-1px); }
+  .btn.ghost { background:var(--surface-hi); color:var(--accent); }
+  .hamburger { display:none; background:none; border:none; color:var(--accent); font-size:24px; cursor:pointer; }
+
+  .hero { padding:150px 0 80px; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; z-index:-1; }
+  .hero-bg img { width:100%; height:100%; object-fit:cover; opacity:.3; }
+  .hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,14,.6) 0%, var(--base) 94%); }
+  .hero .mono { color:var(--primary); }
+  h1 { font-family:'Archivo',sans-serif; font-weight:700; font-size:clamp(38px,6.5vw,70px); line-height:1.05; letter-spacing:-.03em; margin:18px 0 20px; max-width:760px; }
+  h1 em { font-style:normal; color:var(--primary); }
+  .hero p { font-size:18px; color:var(--muted); max-width:560px; margin-bottom:32px; }
+  .hero-cta { display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-meta { display:flex; gap:24px; margin-top:48px; flex-wrap:wrap; }
+  .hero-meta div { display:flex; align-items:center; gap:8px; }
+  .stars { color:#f4b942; letter-spacing:2px; }
+
+  section { padding:80px 0; }
+  .sec-head { margin-bottom:44px; }
+  .sec-head h2 { font-family:'Archivo',sans-serif; font-size:clamp(28px,4vw,44px); letter-spacing:-.02em; margin-top:10px; }
+  .sec-head p { color:var(--muted); margin-top:8px; max-width:560px; }
+
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .about-grid img { border-radius:var(--radius); box-shadow:0 8px 24px rgba(0,0,0,.5); }
+  .about-grid h3 { font-family:'Archivo',sans-serif; font-size:24px; margin-bottom:14px; }
+  .about-grid p { color:var(--muted); margin-bottom:14px; }
+  .hours { display:grid; grid-template-columns:1fr 1fr; gap:8px 32px; margin-top:24px; background:var(--surface); padding:20px; border-radius:var(--radius); }
+  .hours .row { display:flex; justify-content:space-between; font-size:14px; gap:12px; }
+  .hours .row span:last-child { color:var(--accent); font-weight:500; }
+
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+  .card { background:var(--surface); border-radius:var(--radius); padding:28px; box-shadow:0 8px 24px rgba(0,0,0,.5); transition:transform .2s, background .2s; }
+  .card:hover { transform:translateY(-4px); background:var(--surface-hi); }
+  .card .num { font-family:'JetBrains Mono',monospace; color:var(--primary); font-size:13px; }
+  .card h3 { font-family:'Archivo',sans-serif; font-size:19px; margin:10px 0 8px; }
+  .card p { color:var(--muted); font-size:14px; }
+
+  .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .gallery img { width:100%; height:240px; object-fit:cover; border-radius:var(--radius); transition:transform .3s, box-shadow .3s; box-shadow:0 4px 16px rgba(0,0,0,.4); }
+  .gallery img:hover { transform:scale(1.03); box-shadow:0 8px 28px rgba(232,176,40,.18); }
+
+  .loc { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .loc .addr { background:var(--surface); padding:24px; border-radius:var(--radius); margin-bottom:16px; }
+  .loc .addr .mono { color:var(--primary); }
+  .loc .addr h3 { font-family:'Archivo',sans-serif; margin:8px 0; font-size:20px; }
+  .loc .addr p { color:var(--muted); font-size:14px; }
+  .map { border-radius:var(--radius); overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.5); min-height:320px; background:var(--surface-hi); }
+
+  footer { border-top:1px solid rgba(244,244,245,.06); padding:40px 0 56px; }
+  footer p { color:var(--muted); font-size:13px; }
+
+  @media(max-width:820px){
+    .nav-links { display:none; }
+    .hamburger { display:block; }
+    .about-grid, .loc, .hours { grid-template-columns:1fr; }
+    .hero { padding-top:120px; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/htm@3.1.1/dist/htm.js"></script>
+<script>
+const h = window.htm.bind(window.React.createElement);
+const { useState } = window.React;
+const WHATSAPP = "5519994604551";
+const WA_LINK = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Oi! Vim pelo site da Império's Academia. Quero saber os planos.")}`;
+const MODALIDADES = [
+  { n:"01", t:"Musculação", d:"Sala completa com equipamentos para todos os grupos musculares." },
+  { n:"02", t:"Cardio", d:"Esteiras, bicicletas e aparelhos para queimar calorias." },
+  { n:"03", t:"Aulas", d:"Treinos guiados que motivam e aceleram resultados." },
+  { n:"04", t:"Personal", d:"Acompanhamento individual para o seu objetivo." },
+];
+const GALLERY = ["img/hero-cardio.jpg","img/musculacao.jpg","img/fachada.jpg","img/galeria-1.jpg"];
+function App() {
+  const [open, setOpen] = useState(false);
+  return h`<div>
+    <header>
+      <div className="wrap nav">
+        <div className="logo">IMPÉRIO<span>'S</span></div>
+        <nav className="nav-links">
+          <a href="#sobre">Sobre</a><a href="#modalidades">Modalidades</a>
+          <a href="#galeria">Galeria</a><a href="#local">Local</a>
+        </nav>
+        <a className="btn" href=${WA_LINK} target="_blank" rel="noopener">Matricular no WhatsApp</a>
+        <button className="hamburger" onClick=${() => setOpen(!open)}>${open ? "✕" : "☰"}</button>
+      </div>
+    </header>
+    <section className="hero">
+      <div className="hero-bg"><img src="img/hero-cardio.jpg" alt="Sala de cardio da Império's" /></div>
+      <div className="wrap">
+        <div className="mono">● Vila Mimosa · Campinas · Nota 4,8</div>
+        <h1>Forje o seu <em>império</em></h1>
+        <p>Estrutura completa de musculação e cardio, ambiente que motiva e treino de verdade. O seu resultado começa aqui.</p>
+        <div className="hero-cta">
+          <a className="btn" href=${WA_LINK} target="_blank" rel="noopener">Chamar no WhatsApp</a>
+          <a className="btn ghost" href="#galeria">Ver a estrutura</a>
+        </div>
+        <div className="hero-meta">
+          <div><span className="stars">★★★★★</span><span className="mono">4,8 (220+ avaliações)</span></div>
+          <div className="mono">Seg–Sáb · horários a consultar</div>
+        </div>
+      </div>
+    </section>
+    <section id="sobre">
+      <div className="wrap">
+        <div className="sec-head"><div className="mono">// A Império's</div><h2>Estrutura que motiva</h2><p>Uma academia de bairro com cara de grande — e o atendimento que faz diferença.</p></div>
+        <div className="about-grid">
+          <img src="img/musculacao.jpg" alt="Sala de musculação da Império's" />
+          <div>
+            <h3>Do primeiro treino ao objetivo final</h3>
+            <p>Equipamentos completos, ambiente limpo e acolhedor, e um time que acompanha você em cada etapa.</p>
+            <p>Musculação, cardio e aulas para todos os níveis — do iniciante ao avançado.</p>
+            <div className="hours">
+              <div className="row"><span className="mono">Seg – Sáb</span><span>Aberto</span></div>
+              <div className="row"><span className="mono">Horários</span><span>A consultar</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="modalidades">
+      <div className="wrap">
+        <div className="sec-head"><div className="mono">// Modalidades</div><h2>O que a gente oferece</h2></div>
+        <div className="cards">
+          ${MODALIDADES.map(m => h`<div className="card" key=${m.n}>
+            <div className="num">${m.n}</div><h3>${m.t}</h3><p>${m.d}</p>
+          </div>`)}
+        </div>
+      </div>
+    </section>
+    <section id="galeria">
+      <div className="wrap">
+        <div className="sec-head"><div className="mono">// Galeria</div><h2>A academia na real</h2></div>
+        <div className="gallery">
+          ${GALLERY.map((g,i) => h`<img key=${i} src=${g} alt="Fotos reais da Império's Academia" loading="lazy" />`)}
+        </div>
+      </div>
+    </section>
+    <section id="local">
+      <div className="wrap">
+        <div className="sec-head"><div className="mono">// Onde estamos</div><h2>Chega mais</h2></div>
+        <div className="loc">
+          <div>
+            <div className="addr">
+              <div className="mono">Endereço</div>
+              <h3>Império's Academia</h3>
+              <p>Av. Ana Beatriz Bierrembach, 452 — Vila Mimosa<br/>Campinas · SP · 13050-060</p>
+            </div>
+            <div className="addr">
+              <div className="mono">Contato</div>
+              <h3>(19) 99460-4551</h3>
+              <p>Planos e matrícula pelo WhatsApp.</p>
+            </div>
+            <a className="btn" href=${WA_LINK} target="_blank" rel="noopener">Saber planos</a>
+          </div>
+          <div className="map">
+            <iframe title="Mapa Império's Academia" width="100%" height="100%" style=${{border:0,minHeight:"320px"}} loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Av.%20Ana%20Beatriz%20Bierrembach%2C%20452%20-%20Vila%20Mimosa%2C%20Campinas%20-%20SP&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div className="wrap">
+        <div className="logo">IMPÉRIO<span>'S</span></div>
+        <p style=${{marginTop:"12px"}}>Academia · Vila Mimosa, Campinas · (19) 99460-4551</p>
+        <p>© 2026 Império's Academia. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+  </div>`;
+}
+window.ReactDOM.createRoot(document.getElementById('root')).render(h`<${App}/>`);
+</script>
+</body>
+</html>
